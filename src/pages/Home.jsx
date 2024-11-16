@@ -34,9 +34,9 @@ const Home = () => {
     );
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between mb-8 space-y-4 md:space-y-0">
+    <div className="min-h-screen bg-light-background dark:bg-dark-background py-8">
+      <div className="container-custom">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-8 mb-12">
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           <FilterRegion region={region} setRegion={setRegion} />
         </div>
