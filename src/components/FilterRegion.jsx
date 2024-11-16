@@ -7,6 +7,7 @@ const FilterRegion = ({ region, setRegion }) => {
         onChange={(e) => setRegion(e.target.value)}
         className="p-3 rounded-md shadow-md
           bg-white dark:bg-dark-secondary
+          text-black dark:text-white
           focus:outline-none"
       >
         <option value="">Filter by Region</option>

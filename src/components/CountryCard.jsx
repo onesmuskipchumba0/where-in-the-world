@@ -9,7 +9,7 @@ const CountryCard = ({ country }) => {
           alt={`Flag of ${country.name.common}`}
           className="w-full h-48 object-cover"
         />
-        <div className="p-6">
+        <div className="p-6 text-black dark:text-white">
           <h2 className="font-bold text-lg mb-4">{country.name.common}</h2>
           <p className="mb-1">
             <span className="font-semibold">Population:</span>{' '}

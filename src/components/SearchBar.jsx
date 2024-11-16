@@ -13,6 +13,8 @@ const SearchBar = ({ searchTerm, setSearchTerm }) => {
         onChange={(e) => setSearchTerm(e.target.value)}
         className="w-full md:w-96 pl-10 p-3 rounded-md shadow-md
           bg-white dark:bg-dark-secondary
+          text-black dark:text-white
+          placeholder-gray-400 dark:placeholder-gray-300
           focus:outline-none"
       />
     </div>
