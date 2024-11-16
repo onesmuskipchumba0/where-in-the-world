@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
+import axios from 'axios';
+import CountryMap from '../components/CountryMap';
 
 const CountryInfo = () => {
   const { id } = useParams();
@@ -23,52 +24,94 @@ const CountryInfo = () => {
     fetchCountry();
   }, [id]);
 
-  if (loading) return <div className="text-center py-8">Loading...</div>;
-  if (!country) return <div className="text-center py-8">Country not found</div>;
+  if (loading) return (
+    <div className="min-h-screen bg-gray-100 dark:bg-dark-primary flex items-center justify-center">
+      <div className="text-black dark:text-white">Loading...</div>
+    </div>
+  );
+
+  if (!country) return (
+    <div className="min-h-screen bg-gray-100 dark:bg-dark-primary flex items-center justify-center">
+      <div className="text-black dark:text-white">Country not found</div>
+    </div>
+  );
 
   return (
-    <div className="min-h-screen py-8 space-y-12 transition-colors duration-200">
-      <div className="container-custom">
+    <div className="min-h-screen bg-gray-100 dark:bg-dark-primary py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           to="/"
-          className="back-button inline-flex"
+          className="inline-flex items-center px-4 py-2 
+            bg-white dark:bg-dark-secondary
+            text-black dark:text-white 
+            rounded-lg shadow-md
+            hover:shadow-lg transition-shadow duration-200"
         >
-          <ArrowLeftIcon className="h-5 w-5" />
-          <span>Back</span>
+          <ArrowLeftIcon className="h-5 w-5 mr-2" />
+          Back
         </Link>
 
-        {country && (
-          <div className="grid md:grid-cols-2 gap-12 mt-12">
-            <div className="overflow-hidden rounded-lg shadow-md dark:shadow-dark">
-              <img
-                src={country.flags.svg}
-                alt={`Flag of ${country.name.common}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
+        <div className="mt-8 grid md:grid-cols-2 gap-8">
+          <img
+            src={country.flags.svg}
+            alt={`Flag of ${country.name.common}`}
+            className="w-full h-auto rounded-lg shadow-md"
+          />
 
-            <div className="space-y-8">
-              <h1 className="text-3xl font-extrabold">
-                {country.name.common}
-              </h1>
-              
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <p><span className="font-semibold">Native Name:</span> {Object.values(country.name.nativeName)[0].common}</p>
-                  <p><span className="font-semibold">Population:</span> {country.population.toLocaleString()}</p>
-                  <p><span className="font-semibold">Region:</span> {country.region}</p>
-                  <p><span className="font-semibold">Sub Region:</span> {country.subregion}</p>
-                  <p><span className="font-semibold">Capital:</span> {country.capital?.[0]}</p>
-                </div>
-                <div>
-                  <p><span className="font-semibold">Top Level Domain:</span> {country.tld?.[0]}</p>
-                  <p><span className="font-semibold">Currencies:</span> {Object.values(country.currencies).map(c => c.name).join(', ')}</p>
-                  <p><span className="font-semibold">Languages:</span> {Object.values(country.languages).join(', ')}</p>
-                </div>
+          <div className="text-black dark:text-white">
+            <h1 className="text-3xl font-bold mb-6">{country.name.common}</h1>
+            
+            <div className="grid md:grid-cols-2 gap-x-8 gap-y-4">
+              <div>
+                <p><span className="font-semibold">Native Name: </span>
+                  {Object.values(country.name.nativeName)[0].common}</p>
+                <p><span className="font-semibold">Population: </span>
+                  {country.population.toLocaleString()}</p>
+                <p><span className="font-semibold">Region: </span>
+                  {country.region}</p>
+                <p><span className="font-semibold">Sub Region: </span>
+                  {country.subregion}</p>
+                <p><span className="font-semibold">Capital: </span>
+                  {country.capital}</p>
+              </div>
+
+              <div>
+                <p><span className="font-semibold">Top Level Domain: </span>
+                  {country.tld?.join(', ')}</p>
+                <p><span className="font-semibold">Currencies: </span>
+                  {Object.values(country.currencies)
+                    .map(currency => currency.name)
+                    .join(', ')}
+                </p>
+                <p><span className="font-semibold">Languages: </span>
+                  {Object.values(country.languages).join(', ')}
+                </p>
               </div>
             </div>
+
+            {country.borders && (
+              <div className="mt-8">
+                <h2 className="text-xl font-semibold mb-4">Border Countries:</h2>
+                <div className="flex flex-wrap gap-2">
+                  {country.borders.map(border => (
+                    <Link
+                      key={border}
+                      to={`/country/${border}`}
+                      className="px-4 py-1 bg-white dark:bg-dark-secondary 
+                        rounded shadow-sm hover:shadow-md
+                        transition-shadow duration-200"
+                    >
+                      {border}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-        )}
+        </div>
+
+        {/* Map Component */}
+        <CountryMap country={country} />
       </div>
     </div>
   );

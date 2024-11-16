@@ -7,3 +7,12 @@
 body {
   font-family: 'Nunito Sans', sans-serif;
 }
+
+/* Add these styles for the map */
+.dark .leaflet-tile {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+.dark .leaflet-container {
+  background: #242424;
+}
