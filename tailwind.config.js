@@ -7,17 +7,14 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
-      colors: {
-        'dark-elements': 'hsl(209, 23%, 22%)',
-        'dark-background': 'hsl(207, 26%, 17%)',
-        'light-text': 'hsl(200, 15%, 8%)',
-        'light-input': 'hsl(0, 0%, 52%)',
-        'light-background': 'hsl(0, 0%, 98%)',
-        'white': 'hsl(0, 0%, 100%)'
+      backgroundColor: {
+        'dark-primary': 'hsl(207, 26%, 17%)',     // Dark background
+        'dark-secondary': 'hsl(209, 23%, 22%)',    // Dark elements
       },
-      fontFamily: {
-        'nunito': ['Nunito Sans', 'sans-serif']
-      }
+      colors: {
+        'dark-text': 'hsl(0, 0%, 100%)',          // Dark mode text
+        'light-text': 'hsl(200, 15%, 8%)',        // Light mode text
+      },
     },
   },
   plugins: [],

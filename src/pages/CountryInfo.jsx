@@ -27,41 +27,48 @@ const CountryInfo = () => {
   if (!country) return <div className="text-center py-8">Country not found</div>;
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-8 space-y-12 transition-colors duration-200">
+      <div className="container-custom">
         <Link
           to="/"
-          className="inline-flex items-center space-x-2 bg-white dark:bg-gray-800 px-6 py-2 rounded-md shadow-md mb-8"
+          className="back-button inline-flex"
         >
           <ArrowLeftIcon className="h-5 w-5" />
           <span>Back</span>
         </Link>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          <img
-            src={country.flags.svg}
-            alt={`Flag of ${country.name.common}`}
-            className="w-full h-auto shadow-md"
-          />
+        {country && (
+          <div className="grid md:grid-cols-2 gap-12 mt-12">
+            <div className="overflow-hidden rounded-lg shadow-md dark:shadow-dark">
+              <img
+                src={country.flags.svg}
+                alt={`Flag of ${country.name.common}`}
+                className="w-full h-full object-cover"
+              />
+            </div>
 
-          <div className="dark:text-white">
-            <h1 className="text-3xl font-bold mb-6">{country.name.common}</h1>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <p><span className="font-semibold">Native Name:</span> {Object.values(country.name.nativeName)[0].common}</p>
-                <p><span className="font-semibold">Population:</span> {country.population.toLocaleString()}</p>
-                <p><span className="font-semibold">Region:</span> {country.region}</p>
-                <p><span className="font-semibold">Sub Region:</span> {country.subregion}</p>
-                <p><span className="font-semibold">Capital:</span> {country.capital?.[0]}</p>
-              </div>
-              <div>
-                <p><span className="font-semibold">Top Level Domain:</span> {country.tld?.[0]}</p>
-                <p><span className="font-semibold">Currencies:</span> {Object.values(country.currencies).map(c => c.name).join(', ')}</p>
-                <p><span className="font-semibold">Languages:</span> {Object.values(country.languages).join(', ')}</p>
+            <div className="space-y-8">
+              <h1 className="text-3xl font-extrabold">
+                {country.name.common}
+              </h1>
+              
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <p><span className="font-semibold">Native Name:</span> {Object.values(country.name.nativeName)[0].common}</p>
+                  <p><span className="font-semibold">Population:</span> {country.population.toLocaleString()}</p>
+                  <p><span className="font-semibold">Region:</span> {country.region}</p>
+                  <p><span className="font-semibold">Sub Region:</span> {country.subregion}</p>
+                  <p><span className="font-semibold">Capital:</span> {country.capital?.[0]}</p>
+                </div>
+                <div>
+                  <p><span className="font-semibold">Top Level Domain:</span> {country.tld?.[0]}</p>
+                  <p><span className="font-semibold">Currencies:</span> {Object.values(country.currencies).map(c => c.name).join(', ')}</p>
+                  <p><span className="font-semibold">Languages:</span> {Object.values(country.languages).join(', ')}</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

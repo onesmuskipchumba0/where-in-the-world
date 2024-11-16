@@ -34,22 +34,18 @@ const Home = () => {
     );
 
   return (
-    <div className="min-h-screen bg-light-background dark:bg-dark-background py-8">
-      <div className="container-custom">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-8 mb-12">
+    <div className="min-h-screen bg-gray-100 dark:bg-dark-primary">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col md:flex-row justify-between gap-4 mb-8">
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           <FilterRegion region={region} setRegion={setRegion} />
         </div>
         
-        {loading ? (
-          <div className="text-center">Loading...</div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {filteredCountries.map((country) => (
-              <CountryCard key={country.cca3} country={country} />
-            ))}
-          </div>
-        )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {filteredCountries.map((country) => (
+            <CountryCard key={country.cca3} country={country} />
+          ))}
+        </div>
       </div>
     </div>
   );
